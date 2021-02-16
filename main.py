@@ -13,7 +13,7 @@ def homeP():
 
 
 def creatP():
-    pass
+    creatSheet()
 
 
 def repP():
