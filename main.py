@@ -2,7 +2,6 @@ from loadData import *
 from homePage import *
 from creatSheet import *
 from repPage import *
-
 import os
 import streamlit as st
 import pandas as pd
@@ -17,7 +16,7 @@ def creatP():
 
 
 def repP():
-    pass
+    repPage()
 
 
 if __name__ == '__main__':

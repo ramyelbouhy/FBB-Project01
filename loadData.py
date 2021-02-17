@@ -1,16 +1,28 @@
 import streamlit as st
 import os
 import pandas as pd
+from os import listdir
+from os.path import isfile, join
+from pathlib import Path
+import csv
+
+
+# __Upload output file (csv)
+def loadoutput():
+    data = pd.DataFrame()
+    uploadFile = st.file_uploader("Choose ('xlsx' or 'xls') file", type=['xlsx', 'xls'])
+    if uploadFile is not None:
+        xls = pd.ExcelFile(uploadFile)
+        df = pd.read_excel(xls)
+        data = df
+    return data
 
 
 # __Upload Mobile Sheet (csv)
-def loadMobile(folder_path='C:/Users/ramye/Desktop/FBB-Project/'):
-    mobile_df = pd.DataFrame()
-    filenames = os.listdir(folder_path)
-    selected_filename = st.selectbox("Select Mobiles Sheet", filenames)
-    if selected_filename is not None:
-        mobile_df = pd.read_csv(selected_filename)
-    return mobile_df
+
+
+def loadMobile():
+    pass
 
 
 # __Upload Groups file (csv)
@@ -23,11 +35,7 @@ def loadGroups(folder_path='C:/Users/ramye/Desktop/FBB-Project/'):
     return group_df
 
 
-# __Upload output file (csv)
-def loadoutput():
-    data = pd.DataFrame()
-    uploadFile = st.file_uploader("Choose output.csv file", type=['csv'])
-    if uploadFile is not None:
-        df = pd.read_csv(uploadFile)
-        data = df
-    return data
+
+
+
+
