@@ -1,7 +1,7 @@
-from loadData import *
-from homePage import *
-from creatSheet import creatSheet
-from repPage import *
+from loadDatam import *
+from homePagem import *
+from creatSheetm import creatSheet
+from repPagem import *
 import os
 import streamlit as st
 import pandas as pd

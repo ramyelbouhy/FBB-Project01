@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
-from loadData import loadoutput
-from loadData import testpop
+from loadDatam import loadoutput
+from loadDatam import testpop
 import os
 import matplotlib
 matplotlib.use('Agg')
