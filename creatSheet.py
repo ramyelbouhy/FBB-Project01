@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 from loadData import loadoutput
+from loadData import testpop
 import os
 import matplotlib
 matplotlib.use('Agg')
@@ -11,11 +12,14 @@ st.set_option('deprecation.showPyplotGlobalUse', False)
 def creatSheet():
     st.title("Creat Daily Sheet")
     df = pd.DataFrame()
-    df_mobile = pd.read_csv("C:/Users/ramye/Desktop/FBB-Project/Data/mobiles.csv")
-    df_groups = pd.read_csv("C:/Users/ramye/Desktop/FBB-Project/groups.csv")
+    # __ C:/Users/ramye/Desktop/FBB-Project/Data/mobiles.csv
+    df_mobile = pd.read_csv("\\mob-fs-01.mobcorp.intrt.com\\FBB Technical support\\Data\\mobiles.csv")
+    # __ C:/Users/ramye/Desktop/FBB-Project/groups.csv
+    df_groups = pd.read_csv("\\mob-fs-01.mobcorp.intrt.com\\FBB Technical support\\Data\\groups.csv")
     df = loadoutput()
 # __Change Columns type
     df_mobile['MSISDN'] = df_mobile['MSISDN'].astype('str')
+
 
 # __Merge mobile to df
     if 'MSISDN' not in df.columns:
@@ -28,8 +32,6 @@ def creatSheet():
 
     def mergePop():
         # appended pop list
-
-        # usList = []
         popSer = []
         # get US from df and get first 5 No to irritae
         if 'UserName' not in df.columns:
@@ -81,9 +83,47 @@ def creatSheet():
         st.pyplot()
 
     if st.button('export'):
-        path = r"C:/Users/ramye/Desktop/"
+        # __ C:/Users/ramye/Desktop/
+        path = r"\\mob-fs-01.mobcorp.intrt.com\\FBB Technical support\\Data\\"
         df.to_excel(os.path.join(path, r'green1.xlsx'), index=False)
 
+# __________________ new test pop
+    pop_df = pd.DataFrame()
+
+    def testpopmerg():
+
+        # pop_df = testpop()
+        # appended pop list
+        code0 = []
+        code1 = []
+        # get US from df and get first 5 No to irritae
+        if 'UserName' not in df.columns:
+            pass
+        else:
+            df['UserName'] = df['UserName'].astype('str')
+            usList = df['UserName'].to_list()
+            popList = []
+            for us in usList:
+                x = us[:2]
+                code0.append(x)
+            for us1 in usList:
+                x = us1[:6]
+                code1.append(x)
+
+            df['code0'] = pd.Series(code0)
+            df['code1'] = pd.Series(code1)
+
+        return df
+
+    df = testpopmerg()
+# __Merge new pop to df
+    if 'code1' in df.columns:
+        pop_df = testpop()
+        st.dataframe(pop_df)
+        df['code1'] = df['code1'].astype('str')
+        pop_df['code1'] = pop_df['code1'].astype('str')
+        df = df.merge(pop_df, on='code1', how='left')
+        st.dataframe(df)
 
 
 

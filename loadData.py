@@ -26,13 +26,32 @@ def loadMobile():
 
 
 # __Upload Groups file (csv)
-def loadGroups(folder_path='C:/Users/ramye/Desktop/FBB-Project/'):
+# __C:/Users/ramye/Desktop/FBB-Project/
+def loadGroups(folder_path='\\mob-fs-01.mobcorp.intrt.com\\FBB Technical support\\Data'):
     group_df = pd.DataFrame()
     filenames = os.listdir(folder_path)
     selected_filename = st.selectbox("Select Groups Sheet", filenames)
     if selected_filename is not None:
         group_df = pd.read_csv(selected_filename)
     return group_df
+
+
+ # __test vlookup on poplist
+
+
+def testpop():
+    data = pd.DataFrame()
+    # __ r'C:/Users/ramye/Desktop/FBB-Project/data/pop.xlsx'
+    path = r'\\mob-fs-01.mobcorp.intrt.com\\FBB Technical support\\Data\\pop.xlsx'
+    if path is not None:
+        xls = pd.ExcelFile(path)
+        data = pd.read_excel(xls)
+        teplist = []
+        data['code1'] = data['code1'].astype('str')
+        for x in data['code1']:
+            teplist.append("0"+x)
+        data['code1'] = pd.Series(teplist)
+    return data
 
 
 

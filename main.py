@@ -1,6 +1,6 @@
 from loadData import *
 from homePage import *
-from creatSheet import *
+from creatSheet import creatSheet
 from repPage import *
 import os
 import streamlit as st
